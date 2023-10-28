@@ -23,6 +23,6 @@ jobs:
     - uses: cinotify/github-action@v1.1.2
       name: Send Email
       with:
-        to: 'nando._nas@yahoo.com.br'
+        to: nando._nas@yahoo.com.br
         subject: Subject
         body: 'Body'
