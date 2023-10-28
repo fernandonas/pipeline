@@ -1,0 +1,24 @@
+name: CI CD
+
+on:
+  pull_request:
+    branches: [ "develop", "stage", master ]
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build
+    - run: npm run test
+    - uses: cinotify/github-action@main
+      with:
+        to: ${{ secrets.NOTIFICATION_EMAIL }}
+        subject: 'Pipeline'
+        body: 'Notificação de pipeline'
