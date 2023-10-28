@@ -3,8 +3,6 @@ name: CI CD
 on:
   pull_request:
     branches: [ "develop", "stage", master ]
-  push:
-    branches: ['task/refact-pipe']
 
 jobs:
   develop:
@@ -29,13 +27,15 @@ jobs:
         to: ${{ secrets.NOTIFICATION_EMAIL }}
         subject: 'Pipeline'
         body: 'Notificação de pipeline'
-  github-pages:
+  prod:
     name: Production
     environment:
-      name: github-pages
+      name: prod
       url: https://fernandonas.github.io/pipeline/
     needs: [develop]
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v1
