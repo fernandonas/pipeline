@@ -1,4 +1,4 @@
-name: workflow name
+name: Continous Deploy
 
 on:
   push:
@@ -16,19 +16,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
-      - name: Build
+      - name: Build Project
         run: npm run build
-      - name: Test
+      - name: Test Project
         run: npm run test
-      - name: Archive build
+      - name: Archive Build
         if: success()
         uses: actions/upload-artifact@v1
         with:
           name: deploy_dist
           path: dist
   deploy:
+    name: Deploy Project
     runs-on: ubuntu-latest
     needs: build
     steps:
