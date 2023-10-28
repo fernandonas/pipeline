@@ -69,4 +69,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: test-deploy
           FOLDER: deploy_dist/pipeline
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
 
