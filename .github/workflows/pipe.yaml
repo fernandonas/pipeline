@@ -48,7 +48,7 @@ jobs:
           target_branch: stage
           github_token: ${{ secrets.GITHUB_TOKEN }}
   prod:
-    name: Deploy Project
+    name: Submit Project to Deploy
     environment: 
       name: stage
       url: 'https://fernandonas.github.io/pipeline/'
