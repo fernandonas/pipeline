@@ -39,6 +39,7 @@ jobs:
     needs: [develop]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Deploy Stage
         uses: devmasx/merge-branch@master
         with:
