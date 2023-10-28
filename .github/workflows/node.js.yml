@@ -19,3 +19,10 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run test
+    
+    - uses: cinotify/github-action@v1.1.2
+      name: Notificar
+      with:
+        to: 'nando.nas@gmail.com'
+        subject: Subject
+        body: 'Body'
