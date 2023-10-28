@@ -1,8 +1,8 @@
 name: CI CD
 
 on:
-  pull_request:
-    branches: [ "develop", "stage", master ]
+  push:
+    branches: [ "develop" ]
 
 jobs:
   develop:
