@@ -5,9 +5,13 @@ on:
     branches: [ "develop", "stage", master ]
 
 jobs:
-  build:
-    name: Build and test
+  staging:
+    environment:
+      name: Staging  
+      url: https://fernandonas.github.io/pipeline/
+
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v3
     - name: Use Node
