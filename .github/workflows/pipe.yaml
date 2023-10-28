@@ -1,7 +1,7 @@
 name: CI CD
 
 on:
-  push:
+  pull_request:
     branches: [ "develop" ]
 
 jobs:
@@ -49,8 +49,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   prod:
     name: Deploy Project
-    runs-on: ubuntu-latest
+    environment: 
+      name: stage
+      url: 'https://fernandonas.github.io/pipeline/'
     needs: [stage]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -62,6 +65,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: test-deploy
+          BRANCH: gh-pages
           FOLDER: deploy_dist/pipeline
 
