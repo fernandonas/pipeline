@@ -48,17 +48,9 @@ jobs:
           target_branch: stage
           github_token: ${{ secrets.GITHUB_TOKEN }}
   prod:
-    name: Production
-    environment:
-      name: prod
-      url: https://fernandonas.github.io/pipeline/
-    needs: [stage]
-    permissions:
-      pages: write
-      id-token: write
-
+    name: Deploy Project
     runs-on: ubuntu-latest
-
+    needs: [develop]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -66,8 +58,10 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: deploy_dist
-          
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: test-deploy
+          FOLDER: deploy_dist/pipeline
 
