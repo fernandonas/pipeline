@@ -39,14 +39,12 @@ jobs:
     needs: [develop]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
       - name: Deploy Stage
         uses: devmasx/merge-branch@master
         with:
           type: now
           target_branch: stage
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
   prod:
     name: Submit Project to Deploy
     environment: 
@@ -56,9 +54,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Download build
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: deploy_dist
       - name: Deploy to GitHub Pages
