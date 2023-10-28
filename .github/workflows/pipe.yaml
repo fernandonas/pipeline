@@ -7,7 +7,8 @@ on:
     branches: ['task/refact-pipe']
 
 jobs:
-  staging:
+  develop:
+    name: Develop
     environment:
       name: stage  
       url: https://fernandonas.github.io/pipeline/
@@ -28,11 +29,12 @@ jobs:
         to: ${{ secrets.NOTIFICATION_EMAIL }}
         subject: 'Pipeline'
         body: 'Notificação de pipeline'
-  prod:
+  github-pages:
+    name: Production
     environment:
       name: github-pages
       url: https://fernandonas.github.io/pipeline/
-    needs: [staging]
+    needs: [develop]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
