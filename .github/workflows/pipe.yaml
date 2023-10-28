@@ -3,11 +3,13 @@ name: CI CD
 on:
   pull_request:
     branches: [ "develop", "stage", master ]
+  push:
+    branches: ['task/refact-pipe']
 
 jobs:
   staging:
     environment:
-      name: Staging  
+      name: stage  
       url: https://fernandonas.github.io/pipeline/
 
     runs-on: ubuntu-latest
@@ -26,3 +28,15 @@ jobs:
         to: ${{ secrets.NOTIFICATION_EMAIL }}
         subject: 'Pipeline'
         body: 'Notificação de pipeline'
+  prod:
+    environment:
+      name: gitbub-pages
+      url: https://fernandonas.github.io/pipeline/
+    needs: [staging]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cinotify/github-action@main
+        with:
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          subject: 'Pipeline'
+          body: 'Notificação de pipeline 2'
