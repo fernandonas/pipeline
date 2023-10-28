@@ -53,6 +53,9 @@ jobs:
       name: prod
       url: https://fernandonas.github.io/pipeline/
     needs: [stage]
+    permissions:
+      pages: write
+      id-token: write
 
     runs-on: ubuntu-latest
 
